@@ -1,9 +1,16 @@
-function Post() {
+import classes from "./Post.module.css";
+
+interface IPost {
+  author: string;
+  body: string;
+}
+
+function Post({ author, body }: IPost) {
   return (
-    <>
-      <p>Maximilian</p>
-      <p>React.js is awesome!</p>
-    </>
+    <div className={classes.post}>
+      <p className={classes.author}>{author}</p>
+      <p className={classes.text}>{body}</p>
+    </div>
   );
 }
 
