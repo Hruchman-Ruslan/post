@@ -1,12 +1,13 @@
-const names = ["Ruslan", "Anton"];
+interface IPost {
+  author: string;
+  body: string;
+}
 
-function Post() {
-  const choseName = Math.random() > 0.5 ? names[0] : names[1];
-
+function Post({ author, body }: IPost) {
   return (
     <>
-      <p>{choseName}</p>
-      <p>React.js is awesome!</p>
+      <p>{author}</p>
+      <p>{body}</p>
     </>
   );
 }
