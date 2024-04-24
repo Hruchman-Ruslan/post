@@ -1,3 +1,5 @@
+import classes from "./Post.module.css";
+
 interface IPost {
   author: string;
   body: string;
@@ -5,10 +7,10 @@ interface IPost {
 
 function Post({ author, body }: IPost) {
   return (
-    <>
-      <p>{author}</p>
-      <p>{body}</p>
-    </>
+    <div className={classes.post}>
+      <p className={classes.author}>{author}</p>
+      <p className={classes.text}>{body}</p>
+    </div>
   );
 }
 
