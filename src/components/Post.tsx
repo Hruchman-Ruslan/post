@@ -7,7 +7,7 @@ interface IPost {
 
 function Post({ author, body }: IPost) {
   return (
-    <li className={classes.post} key={author}>
+    <li className={classes.post}>
       <p className={classes.author}>{author}</p>
       <p className={classes.text}>{body}</p>
     </li>
