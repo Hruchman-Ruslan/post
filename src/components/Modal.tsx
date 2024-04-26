@@ -4,12 +4,13 @@ import classes from "./Modal.module.css";
 
 interface IModal {
   children: ReactNode;
+  onClose(): void;
 }
 
-function Modal({ children }: IModal) {
+function Modal({ children, onClose }: IModal) {
   return (
     <>
-      <div className={classes.backdrop} />
+      <div className={classes.backdrop} onClick={onClose} />
       <dialog open className={classes.modal}>
         {children}
       </dialog>
