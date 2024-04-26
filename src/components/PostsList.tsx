@@ -15,12 +15,12 @@ function PostList({ isPosting, onStopPosting }: IPostList) {
   const [enteredBody, setEnteredBody] = useState<string>("");
   const [enteredAuthor, setEnteredAuthor] = useState<string>("");
 
-  function bodyChangeHandler(event: ChangeEvent<HTMLTextAreaElement>) {
-    setEnteredBody(event.target.value);
+  function bodyChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
+    setEnteredBody(e.target.value);
   }
 
-  function authorChangeHandler(event: ChangeEvent<HTMLInputElement>) {
-    setEnteredAuthor(event.target.value);
+  function authorChangeHandler(e: ChangeEvent<HTMLInputElement>) {
+    setEnteredAuthor(e.target.value);
   }
 
   return (
@@ -30,6 +30,7 @@ function PostList({ isPosting, onStopPosting }: IPostList) {
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
+            onCancel={onStopPosting}
           />
         </Modal>
       )}

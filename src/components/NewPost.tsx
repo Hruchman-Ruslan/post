@@ -3,11 +3,12 @@ import { ChangeEvent } from "react";
 import classes from "./NewPost.module.css";
 
 interface INewPost {
-  onBodyChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  onAuthorChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBodyChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onAuthorChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onCancel(): void;
 }
 
-function NewPost({ onBodyChange, onAuthorChange }: INewPost) {
+function NewPost({ onBodyChange, onAuthorChange, onCancel }: INewPost) {
   return (
     <form className={classes.form}>
       <p>
@@ -17,6 +18,12 @@ function NewPost({ onBodyChange, onAuthorChange }: INewPost) {
       <p>
         <label htmlFor="name">Your name</label>
         <input type="text" id="name" required onChange={onAuthorChange} />
+      </p>
+      <p className={classes.actions}>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+        <button>Submit</button>
       </p>
     </form>
   );
