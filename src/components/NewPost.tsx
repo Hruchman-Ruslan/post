@@ -1,12 +1,15 @@
 import { ChangeEvent, useState } from "react";
 
+import { IPost } from "./PostsList";
+
 import classes from "./NewPost.module.css";
 
 interface INewPost {
   onCancel(): void;
+  onAddPost(postData: IPost): void;
 }
 
-function NewPost({ onCancel }: INewPost) {
+function NewPost({ onCancel, onAddPost }: INewPost) {
   const [enteredBody, setEnteredBody] = useState<string>("");
   const [enteredAuthor, setEnteredAuthor] = useState<string>("");
 
@@ -20,11 +23,13 @@ function NewPost({ onCancel }: INewPost) {
 
   function submitHandler(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
+
     const postData = {
       body: enteredBody,
       author: enteredAuthor,
     };
-    console.log(postData);
+
+    onAddPost(postData);
     onCancel();
   }
 
