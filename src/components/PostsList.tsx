@@ -6,14 +6,14 @@ import Modal from "./Modal";
 
 import classes from "./PostsList.module.css";
 
-function PostList() {
-  const [modalIsVisible, setModalIsVisible] = useState<boolean>(true);
+interface IPostList {
+  isPosting: boolean;
+  onStopPosting(): void;
+}
+
+function PostList({ isPosting, onStopPosting }: IPostList) {
   const [enteredBody, setEnteredBody] = useState<string>("");
   const [enteredAuthor, setEnteredAuthor] = useState<string>("");
-
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
 
   function bodyChangeHandler(event: ChangeEvent<HTMLTextAreaElement>) {
     setEnteredBody(event.target.value);
@@ -23,40 +23,10 @@ function PostList() {
     setEnteredAuthor(event.target.value);
   }
 
-  // step-01
-  // let modalContent;
-
-  // if (modalIsVisible) {
-  //   modalContent = (
-  //     <Modal onClose={hideModalHandler}>
-  //       <NewPost
-  //         onBodyChange={bodyChangeHandler}
-  //         onAuthorChange={authorChangeHandler}
-  //       />
-  //     </Modal>
-  //   );
-  // }
-
   return (
     <>
-      {/* step-01 */}
-      {/* {modalContent} */}
-
-      {/* step-02 */}
-      {/* {modalIsVisible ? (
-        <Modal onClose={hideModalHandler}>
-          <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
-            />
-        </Modal>
-      ) : (
-        false
-      )} */}
-
-      {/* step-03 best */}
-      {modalIsVisible && (
-        <Modal onClose={hideModalHandler}>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
