@@ -20,6 +20,13 @@ function PostList({ isPosting, onStopPosting }: IPostList) {
   const [posts, setPosts] = useState<IPost[]>([]);
 
   function addPostHandler(postData: IPost) {
+    fetch("http://localhost:some-backend/posts", {
+      method: "POST",
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     setPosts((existingPosts) => [postData, ...existingPosts]);
   }
 
@@ -33,7 +40,7 @@ function PostList({ isPosting, onStopPosting }: IPostList) {
       {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map(({ body, author }) => (
-            <Post key={Math.random()} body={body} author={author} />
+            <Post key={Math.random().toString()} body={body} author={author} />
           ))}
         </ul>
       )}
