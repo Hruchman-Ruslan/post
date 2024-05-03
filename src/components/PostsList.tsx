@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const { VITE_API_URL } = import.meta.env;
+
 import NewPost from "./NewPost";
 import Post from "./Post";
 import Modal from "./Modal";
@@ -20,7 +22,7 @@ function PostList({ isPosting, onStopPosting }: IPostList) {
   const [posts, setPosts] = useState<IPost[]>([]);
 
   function addPostHandler(postData: IPost) {
-    fetch("http://localhost:some-backend/posts", {
+    fetch(`${VITE_API_URL}/posts`, {
       method: "POST",
       body: JSON.stringify(postData),
       headers: {
