@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -20,6 +20,16 @@ interface IPostList {
 
 function PostList({ isPosting, onStopPosting }: IPostList) {
   const [posts, setPosts] = useState<IPost[]>([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch(`${VITE_API_URL}/posts`);
+      const resData = await response.json();
+      setPosts(resData);
+    }
+
+    fetchPosts();
+  }, []);
 
   function addPostHandler(postData: IPost) {
     fetch(`${VITE_API_URL}/posts`, {
