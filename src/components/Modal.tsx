@@ -4,7 +4,7 @@ import classes from "./Modal.module.css";
 
 interface IModal {
   children: ReactNode;
-  onClose(): void;
+  onClose?(): void;
 }
 
 function Modal({ children, onClose }: IModal) {
