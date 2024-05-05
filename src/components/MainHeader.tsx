@@ -3,7 +3,7 @@ import { MdMessage, MdPostAdd } from "react-icons/md";
 import classes from "./MainHeader.module.css";
 
 interface IMainHeader {
-  onCreatePost(): void;
+  onCreatePost?(): void;
 }
 
 function MainHeader({ onCreatePost }: IMainHeader) {

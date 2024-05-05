@@ -5,11 +5,11 @@ import { IPost } from "./PostsList";
 import classes from "./NewPost.module.css";
 
 interface INewPost {
-  onCancel(): void;
-  onAddPost(postData: IPost): void;
+  onCancel?(): void;
+  onAddPost?(postData: IPost): void;
 }
 
-function NewPost({ onCancel, onAddPost }: INewPost) {
+function NewPost({ onCancel = () => {}, onAddPost = () => {} }: INewPost) {
   const [enteredBody, setEnteredBody] = useState<string>("");
   const [enteredAuthor, setEnteredAuthor] = useState<string>("");
 
