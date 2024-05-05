@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { IPost } from "../components/PostsList";
 
@@ -7,11 +8,10 @@ import Modal from "../components/Modal";
 import classes from "./NewPost.module.css";
 
 interface INewPost {
-  onCancel?(): void;
   onAddPost?(postData: IPost): void;
 }
 
-function NewPost({ onCancel = () => {}, onAddPost = () => {} }: INewPost) {
+function NewPost({ onAddPost = () => {} }: INewPost) {
   const [enteredBody, setEnteredBody] = useState<string>("");
   const [enteredAuthor, setEnteredAuthor] = useState<string>("");
 
@@ -32,7 +32,6 @@ function NewPost({ onCancel = () => {}, onAddPost = () => {} }: INewPost) {
     };
 
     onAddPost(postData);
-    onCancel();
   }
 
   return (
@@ -52,9 +51,9 @@ function NewPost({ onCancel = () => {}, onAddPost = () => {} }: INewPost) {
           />
         </p>
         <p className={classes.actions}>
-          <button type="button" onClick={onCancel}>
+          <Link to=".." type="button">
             Cancel
-          </button>
+          </Link>
           <button>Submit</button>
         </p>
       </form>
