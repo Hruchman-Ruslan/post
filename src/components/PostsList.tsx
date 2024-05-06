@@ -1,35 +1,12 @@
-import { useEffect, useState } from "react";
-
-const { VITE_API_URL } = import.meta.env;
+import { useLoaderData } from "react-router-dom";
 
 import Post from "./Post";
 
 import classes from "./PostsList.module.css";
-
-export interface IPost {
-  body: string;
-  author: string;
-}
+import { IPost } from "../types/post";
 
 function PostList() {
-  const [posts, setPosts] = useState<IPost[]>([]);
-  const [isFetching, setIsFetching] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        setIsFetching(true);
-        const response = await fetch(`${VITE_API_URL}/posts`);
-        const resData = await response.json();
-        setPosts(resData);
-        setIsFetching(false);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchPosts();
-  }, []);
+  const posts = useLoaderData() as IPost[];
 
   // function addPostHandler(postData: IPost) {
   //   fetch(`${VITE_API_URL}/posts`, {
@@ -44,22 +21,17 @@ function PostList() {
 
   return (
     <>
-      {!isFetching && posts.length > 0 && (
+      {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map(({ body, author }) => (
             <Post key={Math.random().toString()} body={body} author={author} />
           ))}
         </ul>
       )}
-      {!isFetching && posts.length === 0 && (
+      {posts.length === 0 && (
         <div style={{ textAlign: "center", color: "white" }}>
           <h2>There are no posts yet.</h2>
           <p>Start adding some!</p>
-        </div>
-      )}
-      {isFetching && (
-        <div style={{ textAlign: "center", color: "white" }}>
-          <p>Loading posts...</p>
         </div>
       )}
     </>
