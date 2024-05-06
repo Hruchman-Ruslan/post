@@ -3,7 +3,11 @@ import { useLoaderData } from "react-router-dom";
 import Post from "./Post";
 
 import classes from "./PostsList.module.css";
-import { IPost } from "../types/post";
+
+export interface IPost {
+  body: string;
+  author: string;
+}
 
 function PostList() {
   const posts = useLoaderData() as IPost[];
