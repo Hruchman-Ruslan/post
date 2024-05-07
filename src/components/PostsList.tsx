@@ -12,17 +12,6 @@ export interface IPost {
 function PostList() {
   const posts = useLoaderData() as IPost[];
 
-  // function addPostHandler(postData: IPost) {
-  //   fetch(`${VITE_API_URL}/posts`, {
-  //     method: "POST",
-  //     body: JSON.stringify(postData),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   setPosts((existingPosts) => [postData, ...existingPosts]);
-  // }
-
   return (
     <>
       {posts.length > 0 && (

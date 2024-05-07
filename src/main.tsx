@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from "react-router-dom";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -21,7 +25,25 @@ const router = createBrowserRouter(
           path: "/",
           element: <Posts />,
           loader: async () => fetch(`${VITE_API_URL}/posts`),
-          children: [{ path: "create-post", element: <NewPost /> }],
+          children: [
+            {
+              path: "create-post",
+              element: <NewPost />,
+              action: async ({ request }) => {
+                const formData = await request.formData();
+                const postData = Object.fromEntries(formData);
+                await fetch(`${VITE_API_URL}/posts`, {
+                  method: "POST",
+                  body: JSON.stringify(postData),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                });
+
+                return redirect("/");
+              },
+            },
+          ],
         },
       ],
     },

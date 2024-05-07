@@ -1,54 +1,20 @@
-import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { IPost } from "../components/PostsList";
+import { Form, Link } from "react-router-dom";
 
 import Modal from "../components/Modal";
 
 import classes from "./NewPost.module.css";
 
-interface INewPost {
-  onAddPost?(postData: IPost): void;
-}
-
-function NewPost({ onAddPost = () => {} }: INewPost) {
-  const [enteredBody, setEnteredBody] = useState<string>("");
-  const [enteredAuthor, setEnteredAuthor] = useState<string>("");
-
-  function bodyChangeHandler(e: ChangeEvent<HTMLTextAreaElement>) {
-    setEnteredBody(e.target.value);
-  }
-
-  function authorChangeHandler(e: ChangeEvent<HTMLInputElement>) {
-    setEnteredAuthor(e.target.value);
-  }
-
-  function submitHandler(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const postData = {
-      body: enteredBody,
-      author: enteredAuthor,
-    };
-
-    onAddPost(postData);
-  }
-
+function NewPost() {
   return (
     <Modal>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <Form method="post" className={classes.form}>
         <p>
           <label htmlFor="body">Text</label>
-          <textarea id="body" required rows={3} onChange={bodyChangeHandler} />
+          <textarea id="body" required rows={3} name="body" />
         </p>
         <p>
           <label htmlFor="name">Your name</label>
-          <input
-            type="text"
-            id="name"
-            required
-            onChange={authorChangeHandler}
-          />
+          <input type="text" id="name" required name="author" />
         </p>
         <p className={classes.actions}>
           <Link to=".." type="button">
@@ -56,7 +22,7 @@ function NewPost({ onAddPost = () => {} }: INewPost) {
           </Link>
           <button>Submit</button>
         </p>
-      </form>
+      </Form>
     </Modal>
   );
 }
