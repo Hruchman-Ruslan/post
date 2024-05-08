@@ -4,10 +4,7 @@ import Post from "./Post";
 
 import classes from "./PostsList.module.css";
 
-export interface IPost {
-  body: string;
-  author: string;
-}
+import { IPost } from "../types/post";
 
 function PostList() {
   const posts = useLoaderData() as IPost[];
@@ -16,8 +13,8 @@ function PostList() {
     <>
       {posts.length > 0 && (
         <ul className={classes.posts}>
-          {posts.map(({ body, author }) => (
-            <Post key={Math.random().toString()} body={body} author={author} />
+          {posts.map(({ _id, body, author }) => (
+            <Post key={_id} id={_id} body={body} author={author} />
           ))}
         </ul>
       )}

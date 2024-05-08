@@ -11,6 +11,7 @@ const { VITE_API_URL } = import.meta.env;
 
 import Posts from "./routes/Posts.tsx";
 import NewPost from "./routes/NewPost.tsx";
+import PostDetails from "./routes/PostDetails.tsx";
 import RootLayout from "./routes/RootLayout.tsx";
 
 import "./index.css";
@@ -41,6 +42,13 @@ const router = createBrowserRouter(
                 });
 
                 return redirect("/");
+              },
+            },
+            {
+              path: ":id",
+              element: <PostDetails />,
+              loader: async ({ params }) => {
+                return fetch(`${VITE_API_URL}/posts/${params.id}`);
               },
             },
           ],
